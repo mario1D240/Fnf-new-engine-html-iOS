@@ -35,7 +35,7 @@ enum StorageType
  * ...
  * @author Mihai Alexandru (M.A. Jigsaw)
  */
-class SUtil
+class SUSutil
 {
 	/**
 	 * Uncaught error handler, original made by: sqirra-rng
