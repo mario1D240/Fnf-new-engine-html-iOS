@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: HTML5 Build CI
+
+# Controls when the workflow will run
+on: [workflow_dispatch]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.2.5
+
+      - name: Install Haxelib
+        run: |
+          haxelib setup ~/haxelib
+          haxelib install hxcpp > /dev/null
+          haxelib install lime 7.9.0 --quiet
+          haxelib install openfl 9.1.0 --quiet
+          haxelib --never install flixel --quiet
+          haxelib install flixel-addons --quiet
+          haxelib set openfl 9.1.0
+          haxelib set lime 7.9.0
+
+      - name: Create Version Tag
+        run: echo "${{github.run_id}}" > VERSION
+
+      - name: Compile (Release)
+        run: haxelib run lime build html5 -release -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
+
+      - name: Compile (Debug)
+        run: haxelib run lime build html5 -debug -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
+
+      - name: Publish Artifact (Release)
+        uses: actions/upload-artifact@main
+        with:
+          name: build-release
+          path: export/release/html5/bin
+
+      - name: Publish Artifact (Debug)
+        uses: actions/upload-artifact@main
+        with:
+          name: build-debug
+          path: export/debug/html5/bin
