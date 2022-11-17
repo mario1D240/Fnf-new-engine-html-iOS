@@ -11,6 +11,10 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        build: [release, debug]
+
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -18,36 +22,23 @@ jobs:
       - name: Setup Haxe
         uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.2.5
+          haxe-version: 4.1.5
 
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp > /dev/null
-          haxelib install lime 7.9.0 --quiet
-          haxelib install openfl 9.1.0 --quiet
-          haxelib --never install flixel --quiet
-          haxelib install flixel-addons --quiet
-          haxelib set openfl 9.1.0
-          haxelib set lime 7.9.0
+          haxelib install hxcpp 4.1.1 > /dev/null
+          haxelib install lime 7.8.0 --quiet
+          haxelib git openfl https://github.com/mcagabe19/fastfl-9.0.2.git
+          haxelib --never install flixel 4.8.1 --quiet
+          haxelib install flixel-addons 2.9.0 --quiet
+          echo "${{github.run_id}}" > VERSION
 
-      - name: Create Version Tag
-        run: echo "${{github.run_id}}" > VERSION
+      - name: Compile
+        run: haxelib run lime build html5 -${{ matrix.arch }} -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
 
-      - name: Compile (Release)
-        run: haxelib run lime build html5 -release -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
-
-      - name: Compile (Debug)
-        run: haxelib run lime build html5 -debug -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
-
-      - name: Publish Artifact (Release)
+      - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
-          name: build-release
-          path: export/release/html5/bin
-
-      - name: Publish Artifact (Debug)
-        uses: actions/upload-artifact@main
-        with:
-          name: build-debug
-          path: export/debug/html5/bin
+          name: build-${{ matrix.arch }}
+          path: export/${{ matrix.arch }}/html5/bin
