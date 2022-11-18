@@ -36,10 +36,15 @@ jobs:
           echo "${{github.run_id}}" > VERSION
 
       - name: Compile
-        run: haxelib run lime build html5 -${{ matrix.build }} -final -clean -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
+        run: haxelib run lime build html5 -${{ matrix.build }} -clean -D no-compilation -D macro-times -D analyzer-optimize --app-version="4.0.0-${{ github.run_id}}"
 
       - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
+          if [ "${{ matrix.build }}" == final]; then
+          name: build-final
+          path: export/release/html5/bin
+          else
           name: build-${{ matrix.build }}
           path: export/${{ matrix.build }}/html5/bin
+          fi
