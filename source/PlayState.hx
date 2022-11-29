@@ -402,12 +402,12 @@ class PlayState extends FlxTransitionableState
 			healthHeads.animation.play('unhealthy');
 		else
 			healthHeads.animation.play('healthy');
-		/* 
+		 
 			if (FlxG.keys.justPressed.NINE)
 				FlxG.switchState(new Charting());
 			if (FlxG.keys.justPressed.EIGHT)
 				FlxG.switchState(new Charting(true));
-		 */
+		 
 
 		if (countingDown)
 		{
