@@ -68,8 +68,15 @@ class PlayState extends FlxTransitionableState
 
 	private var healthHeads:FlxSprite;
 
+        var controls(get, never):Controls;
+
+	inline function get_controls():Controls
+		return PlayerSettings.player1.controls;
+
 	override public function create()
 	{
+                PlayerSettings.init();
+
 		persistentUpdate = true;
 		persistentDraw = true;
 
@@ -675,20 +682,20 @@ class PlayState extends FlxTransitionableState
 	private function keyShit():Void
 	{
 		// HOLDING
-		static var up = Controls.UP;
-		static var right = Controls.RIGHT;
-		static var down = Controls.DOWN;
-		static var left = Controls.LEFT;
+	        var up = Controls.UP;
+		var right = Controls.RIGHT;
+		var down = Controls.DOWN;
+		var left = Controls.LEFT;
 
-		static var upP = Controls.UP_P;
-		static var rightP = Controls.RIGHT_P;
-		static var downP = Controls.RIGHT_P;
-		static var leftP = Controls.LEFT_P;
+		var upP = Controls.UP_P;
+		var rightP = Controls.RIGHT_P;
+		var downP = Controls.RIGHT_P;
+		var leftP = Controls.LEFT_P;
 
-		static var upR = Controls.UP_R;
-		static var rightR = Controls.RIGHT_R;
-		static var downR = Controls.DOWN_R;
-		static var leftR = Controls.LEFT_R;
+		var upR = Controls.UP_R;
+		var rightR = Controls.RIGHT_R;
+		var downR = Controls.DOWN_R;
+		var leftR = Controls.LEFT_R;
 
 		FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
