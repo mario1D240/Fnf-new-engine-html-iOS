@@ -33,6 +33,8 @@ class TitleState extends MusicBeatState
 		TitleState.soundExt = '.ogg';
 		#end
 
+                PlayerSettings.init();
+
 		super.create();
 
 		if (!initialized)
