@@ -1,6 +1,6 @@
 package;
 
-import Controls
+import Controls;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.addons.transition.Transition;
