@@ -40,6 +40,16 @@ class GameOverState extends FlxTransitionableState
 	{
 		var pressed:Bool = FlxG.keys.justPressed.ANY;
 
+               	#if (mobile || web)
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				pressed = true;
+			}
+		}
+		#end
+
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)
