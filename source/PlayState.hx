@@ -667,20 +667,20 @@ class PlayState extends FlxTransitionableState
 	private function keyShit():Void
 	{
 		// HOLDING
-		var up = FlxG.keys.anyPressed([W, UP]);
-		var right = FlxG.keys.anyPressed([D, RIGHT]);
-		var down = FlxG.keys.anyPressed([S, DOWN]);
-		var left = FlxG.keys.anyPressed([A, LEFT]);
+		var up = Controls.UP
+		var right = Controls.RIGHT
+		var down = Controls.DOWN
+		var left = Controls.LEFT
 
-		var upP = FlxG.keys.anyJustPressed([W, UP]);
-		var rightP = FlxG.keys.anyJustPressed([D, RIGHT]);
-		var downP = FlxG.keys.anyJustPressed([S, DOWN]);
-		var leftP = FlxG.keys.anyJustPressed([A, LEFT]);
+		var upP = Controls.UP_P
+		var rightP = Controls.RIGHT_P
+		var downP = Controls.RIGHT_P
+		var leftP = Controls.LEFT_P
 
-		var upR = FlxG.keys.anyJustReleased([W, UP]);
-		var rightR = FlxG.keys.anyJustReleased([D, RIGHT]);
-		var downR = FlxG.keys.anyJustReleased([S, DOWN]);
-		var leftR = FlxG.keys.anyJustReleased([A, LEFT]);
+		var upR = Controls.UP_R
+		var rightR = Controls.RIGHT_R
+		var downR = Controls.DOWN_R
+		var leftR = Controls.LEFT_R
 
 		FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
@@ -831,10 +831,10 @@ class PlayState extends FlxTransitionableState
 	function badNoteCheck()
 	{
 		// just double pasting this shit cuz fuk u
-		var upP = FlxG.keys.anyJustPressed([W, UP]);
-		var rightP = FlxG.keys.anyJustPressed([D, RIGHT]);
-		var downP = FlxG.keys.anyJustPressed([S, DOWN]);
-		var leftP = FlxG.keys.anyJustPressed([A, LEFT]);
+		var upP = Controls.UP_P
+		var rightP = Controls.RIGHT_P
+		var downP = Controls.DOWN_P
+		var leftP = Controls.LEFT_P
 
 		if (leftP)
 			noteMiss(4);
