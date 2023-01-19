@@ -9,7 +9,7 @@ import flixel.input.actions.FlxActionInput;
 import flixel.util.FlxDestroyUtil;
 #end
 
-class FlxTransitionableState extends FlxState
+class AughState extends FlxState
 {
 	public static var defaultTransIn:TransitionData = null;
 	public static var defaultTransOut:TransitionData = null;
