@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
-import flixel.addons.transition.FlxTransitionableState;
+import AughState;
 import flixel.addons.transition.TransitionData;
 import flixel.graphics.FlxGraphic;
 import flixel.math.FlxPoint;
@@ -15,7 +15,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
-class TitleState extends FlxTransitionableState
+class TitleState extends AughState
 {
 	static var initialized:Bool = false;
 
@@ -33,18 +33,18 @@ class TitleState extends FlxTransitionableState
 			diamond.persist = true;
 			diamond.destroyOnNoUse = false;
 
-			FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 2, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
+			AughState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 2, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
 				new FlxRect(0, 0, FlxG.width, FlxG.height));
-			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 1.3, new FlxPoint(0, 1),
+			AughState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 1.3, new FlxPoint(0, 1),
 				{asset: diamond, width: 32, height: 32}, new FlxRect(0, 0, FlxG.width, FlxG.height));
 
 			initialized = true;
 
-			FlxTransitionableState.defaultTransIn.tileData = {asset: diamond, width: 32, height: 32};
-			FlxTransitionableState.defaultTransOut.tileData = {asset: diamond, width: 32, height: 32};
+			AughState.defaultTransIn.tileData = {asset: diamond, width: 32, height: 32};
+			AughState.defaultTransOut.tileData = {asset: diamond, width: 32, height: 32};
 
-			transIn = FlxTransitionableState.defaultTransIn;
-			transOut = FlxTransitionableState.defaultTransOut;
+			transIn = AughState.defaultTransIn;
+			transOut = AughState.defaultTransOut;
 		}
 
 		persistentUpdate = true;
