@@ -25,6 +25,7 @@ jobs:
           haxelib install hscript 2.4.0 --quiet
           haxelib --never git flixel https://github.com/mcagabe19/flixel-4.9.0.git --quiet
           haxelib install flixel-addons 2.11.0 --quiet
+          haxelib install flixel-ui 2.3.3 --quiet
       - name: Compile
         run: haxelib run lime build html5 -${{ matrix.build }} -D no-compilation -D macro-times -D analyzer-optimize
       - name: Publish Artifact
