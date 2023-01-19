@@ -1,4 +1,4 @@
-package flixel.addons.transition;
+package;
 
 import flixel.FlxState;
 #if mobileCweb
