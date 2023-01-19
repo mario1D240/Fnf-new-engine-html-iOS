@@ -65,8 +65,15 @@ class PlayState extends MusicBeatState
 
 	private var healthHeads:FlxSprite;
 
+        var controls(get, never):Controls;
+
+	inline function get_controls():Controls
+		return PlayerSettings.player1.controls;
+
 	override public function create()
 	{
+                PlayerSettings.init();
+
 		persistentUpdate = true;
 		persistentDraw = true;
 
