@@ -70,10 +70,7 @@ class PlayState extends FlxTransitionableState
 
 	override public function create()
 	{
-                Paths.clearUnusedMemory();
-                Paths.clearStoredMemory();
-
-		persistentUpdate = true;
+                persistentUpdate = true;
 		persistentDraw = true;
 
 		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(AssetPaths.stageback__png);
