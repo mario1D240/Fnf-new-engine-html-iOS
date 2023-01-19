@@ -37,7 +37,14 @@ class GameOverState extends FlxTransitionableState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.ANY && !fading)
+                #if (mobile || mobileCweb)
+                var justTouched:Bool = false;
+                for (touch in FlxG.touches.list)
+	        if (touch.justPressed)
+		justTouched = true;
+                #end
+
+		if (#if (mobile || mobileCweb) justTouched || #end FlxG.keys.justPressed.ANY && !fading)
 		{
 			fading = true;
 			FlxG.sound.music.fadeOut(0.5, 0, function(twn:FlxTween)
