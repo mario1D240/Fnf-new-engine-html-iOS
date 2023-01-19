@@ -5,7 +5,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.display.FlxGridOverlay;
-import flixel.addons.transition.FlxTransitionableState;
+import AughState;
 import flixel.graphics.atlas.FlxAtlas;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -25,7 +25,7 @@ import lime.utils.Assets;
 
 using StringTools;
 
-class PlayState extends FlxTransitionableState
+class PlayState extends AughState
 {
 	public static var curLevel:String = 'Bopeebo';
 
