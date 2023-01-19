@@ -220,6 +220,11 @@ class PlayState extends MusicBeatState
 		healthHeads.antialiasing = true;
 		add(healthHeads);
 
+                #if (mobile || web)
+                addHitbox();
+                addHitboxCamera();
+                #end
+
 		super.create();
 	}
 
@@ -458,7 +463,7 @@ class PlayState extends MusicBeatState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -555,6 +560,9 @@ class PlayState extends MusicBeatState
 				case 163:
 					FlxG.sound.music.stop();
 					curLevel = 'Bopeebo';
+                                        #if (mobile || web)
+                                        removeHitbox();
+                                        #end
 					FlxG.switchState(new TitleState());
 			}
 		}
