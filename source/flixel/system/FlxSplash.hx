@@ -47,7 +47,7 @@ class FlxSplash extends FlxState
 		_cachedAutoPause = FlxG.autoPause;
 		FlxG.autoPause = false;
 
-		animatedTex = FlxAtlasFrames.fromSparrow('assets/images/ui/flixel_intro.png', 'assets/images/ui/flixel_intro.xml', null);
+		animatedTex = FlxAtlasFrames.fromSparrow('assets/images/ui/flixel_intro.png', 'assets/images/ui/flixel_intro.xml');
 
 		animatedIntro = new FlxSprite(0,0);
 		animatedIntro.frames = animatedTex;
@@ -68,7 +68,7 @@ class FlxSplash extends FlxState
 		#if FLX_SOUND_SYSTEM
 		if (!muted)
 		{
-			FlxG.sound.load(Paths.sound("flixel", 'preload')).play();
+			FlxG.sound.load(assets/sounds/flixel.mp3).play();
 		}
 		#end
 		if (FlxG.save.data.hasSeenSplash != null && FlxG.save.data.hasSeenSplash)
