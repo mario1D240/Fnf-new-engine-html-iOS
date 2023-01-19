@@ -28,7 +28,7 @@ jobs:
       - name: Compile
         run: haxelib run lime build html5 -D no-compilation -D macro-times -D analyzer-optimize
       - name: help me
-        run: lstree
+        run: tree
       # - name: Publish Artifact
         # uses: actions/upload-artifact@main
         # with:
