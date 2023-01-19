@@ -21,6 +21,10 @@ class TitleState extends FlxTransitionableState
 
 	override public function create():Void
 	{
+                #if android
+                FlxG.android.preventDefaultKeys = [BACK];
+                #end
+
 		super.create();
 
 		if (!initialized)
