@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxState;
+import flixel.addons.transition.Transition;
 import flixel.addons.transition.TransitionData;
 #if mobileCweb
 import mobile.flixel.FlxHitbox;
