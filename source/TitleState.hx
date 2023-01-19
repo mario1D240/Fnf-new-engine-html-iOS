@@ -29,7 +29,11 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		#if (!web)
+                #if android
+                FlxG.android.preventDefaultKeys = [BACK];
+                #end
+
+		#if !web
 		TitleState.soundExt = '.ogg';
 		#end
 
