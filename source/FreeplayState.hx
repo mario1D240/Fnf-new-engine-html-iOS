@@ -33,11 +33,11 @@ class FreeplayState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.UP)
+		if (Controls.UP_P)
 		{
 			curSelected -= 1;
 		}
-		if (FlxG.keys.justPressed.DOWN)
+		if (Controls.DOWN_P)
 		{
 			curSelected += 1;
 		}
@@ -49,7 +49,7 @@ class FreeplayState extends MusicBeatState
 
 		selector.y = (26 * curSelected) + 30;
 
-		if (FlxG.keys.justPressed.ENTER)
+		if (Controls.ACCEPT)
 		{
 			PlayState.SONG = Song.loadFromJson(songs[curSelected].toLowerCase());
 			FlxG.switchState(new PlayState());
