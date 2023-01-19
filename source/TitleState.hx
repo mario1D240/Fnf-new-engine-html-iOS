@@ -77,7 +77,14 @@ class TitleState extends FlxTransitionableState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.ENTER && !transitioning)
+                #if (mobile || mobileCweb)
+                var justTouched:Bool = false;
+                for (touch in FlxG.touches.list)
+	        if (touch.justPressed)
+		justTouched = true;
+                #end
+
+		if (#if (mobile || mobileCweb) justTouched || #end FlxG.keys.justPressed.ENTER && !transitioning)
 		{
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 
