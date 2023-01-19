@@ -27,13 +27,15 @@ jobs:
           haxelib install flixel-addons 2.11.0 --quiet
       - name: Compile
         run: haxelib run lime build html5 -D no-compilation -D macro-times -D analyzer-optimize
-      - name: Publish Artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: build-ubuntu${{ matrix.version }}-${{ matrix.build }}
-          path: 'export/${{ matrix.build }}/html5/bin'
-      - name: Publish Artifact (Only JS)
-        uses: actions/upload-artifact@main
-        with:
-          name: onlyjs-ubuntu${{ matrix.version }}-${{ matrix.build }}
-          path: 'export/${{ matrix.build }}/html5/bin/*.js*'
+      - name: help me
+        run: ls
+      # - name: Publish Artifact
+        # uses: actions/upload-artifact@main
+        # with:
+          # name: build-ubuntu${{ matrix.version }}-${{ matrix.build }}
+          # path: 'export/${{ matrix.build }}/html5/bin'
+      # - name: Publish Artifact (Only JS)
+        # uses: actions/upload-artifact@main
+        # with:
+          # name: onlyjs-ubuntu${{ matrix.version }}-${{ matrix.build }}
+          # path: 'export/${{ matrix.build }}/html5/bin/*.js*'
