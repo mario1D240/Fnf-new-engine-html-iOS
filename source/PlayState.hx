@@ -211,6 +211,11 @@ class PlayState extends FlxTransitionableState
 		healthHeads.scrollFactor.set();
 		add(healthHeads);
 
+                #if mobileCweb
+                addHitbox();
+                addHitboxCamera();
+                #end
+
 		super.create();
 	}
 
