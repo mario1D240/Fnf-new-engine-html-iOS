@@ -1,105 +1,60 @@
 package;
 
-#if android
-import android.Permissions;
-import android.content.Context;
-import android.os.Build;
-import android.os.Environment;
-import android.widget.Toast;
-#end
 import haxe.CallStack;
-import haxe.io.Path;
 import lime.system.System as LimeSystem;
 import openfl.Lib;
 import openfl.events.UncaughtErrorEvent;
-import openfl.utils.Assets;
+import haxe.Log;
 
 using StringTools;
 
-#if (sys && !ios)
-import sys.FileSystem;
-import sys.io.File;
-#elseif html5
-import js.html.FileSystem;
-import js.html.File;
-#end
-
-enum StorageType
-{
-	ANDROID_DATA;
-	ROOT;
-        STORAGE;
-}
-
-/**
- * ...
- * @author Mihai Alexandru (M.A. Jigsaw)
- */
 class SUSutil
 {
-	/**
-	 * Uncaught error handler, original made by: sqirra-rng
-	 */
 	public static function uncaughtErrorHandler():Void
 	{
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, function(u:UncaughtErrorEvent)
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onError);
+		Lib.application.onExit.add(function(exitCode:Int)
 		{
-			var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-			var errMsg:String = '';
-
-			for (stackItem in callStack)
-			{
-				switch (stackItem)
-				{
-					case CFunction:
-						errMsg += 'a C function\n';
-					case Module(m):
-						errMsg += 'module ' + m + '\n';
-					case FilePos(s, file, line, column):
-						errMsg += file + ' (line ' + line + ')\n';
-					case Method(cname, meth):
-						errMsg += cname == null ? "<unknown>" : cname + '.' + meth + '\n';
-					case LocalFunction(n):
-						errMsg += 'local function ' + n + '\n';
-				}
-			}
-
-			errMsg += u.error;
-
-			#if (sys && !ios)
-			try
-			{
-				if (!FileSystem.exists(SUtil.getStorageDirectory() + 'logs'))
-					FileSystem.createDirectory(SUtil.getStorageDirectory() + 'logs');
-
-				File.saveContent(SUtil.getStorageDirectory()
-					+ 'logs/'
-					+ Lib.application.meta.get('file')
-					+ '-'
-					+ Date.now().toString().replace(' ', '-').replace(':', "'")
-					+ '.log',
-					errMsg
-					+ '\n');
-			}
-			#if android
-			catch (e:Dynamic)
-			Toast.makeText("Error!\nClouldn't save the crash dump because:\n" + e, Toast.LENGTH_LONG);
-			#end
-			#end
-
-			println(errMsg);
-			Lib.application.window.alert(errMsg, 'Error!');
-			LimeSystem.exit(1);
+			if (Lib.current.loaderInfo.uncaughtErrorEvents.hasEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR))
+				Lib.current.loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onError);
 		});
 	}
 
-        private static function println(msg:String):Void
+	private static function onError(e:UncaughtErrorEvent):Void
 	{
-		#if sys
-		Sys.println(msg);
-		#else
-		// Pass null to exclude the position.
-		haxe.Log.trace(msg, null);
-		#end
+		var stack:Array<String> = [];
+		stack.push(e.error);
+
+		for (stackItem in CallStack.exceptionStack(true))
+		{
+			switch (stackItem)
+			{
+				case CFunction:
+					stack.push('Non-Haxe (C) Function');
+				case Module(m):
+					stack.push('Module ($m)');
+				case FilePos(s, file, line, column):
+					stack.push('$file (line $line)');
+				case Method(classname, method):
+					stack.push('$classname (method $method)');
+				case LocalFunction(name):
+					stack.push('Local Function ($name)');
+			}
+		}
+
+		e.preventDefault();
+		e.stopPropagation();
+		e.stopImmediatePropagation();
+
+		final msg:String = stack.join('\n');
+
+		println(msg);
+		Lib.application.window.alert(msg, 'Error!');
+		LimeSystem.exit(1);
+	}
+
+	private static function println(msg:String):Void
+	{
+		Log.trace(msg, null);
 	}
 }
