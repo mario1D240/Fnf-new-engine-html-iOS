@@ -467,6 +467,9 @@ class PlayState extends FlxTransitionableState
 				case 163:
 					FlxG.sound.music.stop();
 					curLevel = 'Bopeebo';
+                                        #if mobileCweb
+                                        removeHitbox();
+                                        #end
 					FlxG.switchState(new TitleState());
 			}
 		}
