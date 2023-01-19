@@ -68,16 +68,9 @@ class PlayState extends FlxTransitionableState
 
 	private var healthHeads:FlxSprite;
 
-        var controls(get, never):Controls;
-
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
-
 	override public function create()
 	{
-                PlayerSettings.init();
-
-		persistentUpdate = true;
+                persistentUpdate = true;
 		persistentDraw = true;
 
 		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(AssetPaths.stageback__png);
@@ -217,11 +210,6 @@ class PlayState extends FlxTransitionableState
 		healthHeads.y = healthBar.y - (healthHeads.height / 2);
 		healthHeads.scrollFactor.set();
 		add(healthHeads);
-
-                #if mobileCweb
-                addHitbox();
-                addHitboxCamera();
-                #end
 
 		super.create();
 	}
@@ -411,11 +399,12 @@ class PlayState extends FlxTransitionableState
 			healthHeads.animation.play('unhealthy');
 		else
 			healthHeads.animation.play('healthy');
-
+		 
 			if (FlxG.keys.justPressed.NINE)
 				FlxG.switchState(new Charting());
 			if (FlxG.keys.justPressed.EIGHT)
 				FlxG.switchState(new Charting(true));
+		 
 
 		if (countingDown)
 		{
@@ -474,9 +463,6 @@ class PlayState extends FlxTransitionableState
 				case 163:
 					FlxG.sound.music.stop();
 					curLevel = 'Bopeebo';
-                                        #if mobileCweb
-                                        removeHitbox();
-                                        #end
 					FlxG.switchState(new TitleState());
 			}
 		}
@@ -682,20 +668,20 @@ class PlayState extends FlxTransitionableState
 	private function keyShit():Void
 	{
 		// HOLDING
-	        var up = Controls.UP;
-		var right = Controls.RIGHT;
-		var down = Controls.DOWN;
-		var left = Controls.LEFT;
+		var up = FlxG.keys.anyPressed([W, UP]);
+		var right = FlxG.keys.anyPressed([D, RIGHT]);
+		var down = FlxG.keys.anyPressed([S, DOWN]);
+		var left = FlxG.keys.anyPressed([A, LEFT]);
 
-		var upP = Controls.UP_P;
-		var rightP = Controls.RIGHT_P;
-		var downP = Controls.RIGHT_P;
-		var leftP = Controls.LEFT_P;
+		var upP = FlxG.keys.anyJustPressed([W, UP]);
+		var rightP = FlxG.keys.anyJustPressed([D, RIGHT]);
+		var downP = FlxG.keys.anyJustPressed([S, DOWN]);
+		var leftP = FlxG.keys.anyJustPressed([A, LEFT]);
 
-		var upR = Controls.UP_R;
-		var rightR = Controls.RIGHT_R;
-		var downR = Controls.DOWN_R;
-		var leftR = Controls.LEFT_R;
+		var upR = FlxG.keys.anyJustReleased([W, UP]);
+		var rightR = FlxG.keys.anyJustReleased([D, RIGHT]);
+		var downR = FlxG.keys.anyJustReleased([S, DOWN]);
+		var leftR = FlxG.keys.anyJustReleased([A, LEFT]);
 
 		FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
@@ -846,10 +832,10 @@ class PlayState extends FlxTransitionableState
 	function badNoteCheck()
 	{
 		// just double pasting this shit cuz fuk u
-		var upP = Controls.UP_P;
-		var rightP = Controls.RIGHT_P;
-		var downP = Controls.DOWN_P;
-		var leftP = Controls.LEFT_P;
+		var upP = FlxG.keys.anyJustPressed([W, UP]);
+		var rightP = FlxG.keys.anyJustPressed([D, RIGHT]);
+		var downP = FlxG.keys.anyJustPressed([S, DOWN]);
+		var leftP = FlxG.keys.anyJustPressed([A, LEFT]);
 
 		if (leftP)
 			noteMiss(4);
