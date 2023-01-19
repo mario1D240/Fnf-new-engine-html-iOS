@@ -23,7 +23,7 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" />
+	<window if="mobile" orientation="landscape" fullscreen="true" resizable="false" allow-shaders="true" require-shaders="true" allow-high-dpi="true" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -33,6 +33,8 @@
 
 	<classpath name="source" />
 
+        <assets path="mobile" rename="assets/mobile" if="mobile || web" />
+
 	<assets path="assets/images"/>
 	<assets path="assets/data"/>
 	
@@ -40,7 +42,6 @@
 	<assets path="assets/music" include="*.ogg" unless="web" />
 	<assets path="assets/sounds" include="*.mp3" if="web" />
 	<assets path="assets/sounds" include="*.ogg" unless="web" />
-
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -68,9 +69,9 @@
 	<!--<haxedef name="FLX_NO_NATIVE_CURSOR" />-->
 
 	<!--Optimise inputs, be careful you will get null errors if you don't use conditionals in your game-->
-	<haxedef name="FLX_NO_MOUSE" if="mobile" />
-	<haxedef name="FLX_NO_KEYBOARD" if="mobile" />
-	<haxedef name="FLX_NO_TOUCH" if="desktop" />
+	<!-- <haxedef name="FLX_NO_MOUSE" if="mobile" /> -->
+	<!-- <haxedef name="FLX_NO_KEYBOARD" if="mobile" /> -->
+	<!-- <haxedef name="FLX_NO_TOUCH" if="desktop" /> -->
 	<!--<haxedef name="FLX_NO_GAMEPAD" />-->
 
 	<!--Disable the Flixel core sound tray-->
@@ -87,6 +88,33 @@
 
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+
+	<!--Always enable Null Object Reference check-->
+	<haxedef name="HXCPP_CHECK_POINTER" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE"/>
+
+	<section if="android">
+		<!--Permissions-->
+		<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
+		<config:android permission="android.permission.ACCESS_WIFI_STATE" />
+		<config:android permission="android.permission.INTERNET" />
+		<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<config:android permission="android.permission.READ_EXTERNAL_STORAGE" />
+		<config:android permission="android.permission.VIBRATE" />
+
+		<!--Gradle-->
+		<config:android gradle-version="7.6" gradle-plugin="7.3.1" />
+
+		<!--Audio Recording Fix-->
+		<config:android target-sdk-version="29" if="${lime <= 8.0.0}" />
+	</section>
+
+	<section if="ios">
+		<!--Dependency--> 
+		<dependency name="Metal.framework" />
+		<dependency name="WebKit.framework" />
+	</section>
 
 	<!-- _________________________________ Custom _______________________________ -->
 
