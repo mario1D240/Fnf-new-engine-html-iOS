@@ -672,20 +672,20 @@ class PlayState extends FlxTransitionableState
 	private function keyShit():Void
 	{
 		// HOLDING
-		var up = Controls.UP
-		var right = Controls.RIGHT
-		var down = Controls.DOWN
-		var left = Controls.LEFT
+		var up = Controls.UP;
+		var right = Controls.RIGHT;
+		var down = Controls.DOWN;
+		var left = Controls.LEFT;
 
-		var upP = Controls.UP_P
-		var rightP = Controls.RIGHT_P
-		var downP = Controls.RIGHT_P
-		var leftP = Controls.LEFT_P
+		var upP = Controls.UP_P;
+		var rightP = Controls.RIGHT_P;
+		var downP = Controls.RIGHT_P;
+		var leftP = Controls.LEFT_P;
 
-		var upR = Controls.UP_R
-		var rightR = Controls.RIGHT_R
-		var downR = Controls.DOWN_R
-		var leftR = Controls.LEFT_R
+		var upR = Controls.UP_R;
+		var rightR = Controls.RIGHT_R;
+		var downR = Controls.DOWN_R;
+		var leftR = Controls.LEFT_R;
 
 		FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
@@ -836,10 +836,10 @@ class PlayState extends FlxTransitionableState
 	function badNoteCheck()
 	{
 		// just double pasting this shit cuz fuk u
-		var upP = Controls.UP_P
-		var rightP = Controls.RIGHT_P
-		var downP = Controls.DOWN_P
-		var leftP = Controls.LEFT_P
+		var upP = Controls.UP_P;
+		var rightP = Controls.RIGHT_P;
+		var downP = Controls.DOWN_P;
+		var leftP = Controls.LEFT_P;
 
 		if (leftP)
 			noteMiss(4);
