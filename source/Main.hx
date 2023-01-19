@@ -10,7 +10,7 @@ class Main extends Sprite
 	{
                 SUtil.uncaughtErrorHandler();
 		super();
-		addChild(new FlxGame(0, 0, FreeplayState));
+		addChild(new FlxGame(0, 0, TitleState));
 		addChild(new FPS(10, 3, 0xFFFFFF));
 	}
 }
