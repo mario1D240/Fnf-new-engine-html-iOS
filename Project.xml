@@ -30,7 +30,7 @@
 	<classpath name="source" />
 	<assets path="assets" />
 
-        <assets path="mobile" rename="assets/mobile" if="mobile" />
+        <assets path="mobile" rename="assets/mobile" if="mobile || mobileCweb" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
