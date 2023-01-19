@@ -67,13 +67,8 @@ class PlayState extends MusicBeatState
 
 	var controls(get, never):Controls;
 
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
-
 	override public function create()
 	{
-		PlayerSettings.init();
-
 		persistentUpdate = true;
 		persistentDraw = true;
 
