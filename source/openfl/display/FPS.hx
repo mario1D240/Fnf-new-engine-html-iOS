@@ -36,7 +36,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("robotoserif120pt.ttf", 15, color);
+		defaultTextFormat = new TextFormat("_sans", 15, color);
 		text = "FPS: ";
 
 		cacheCount = 0;
