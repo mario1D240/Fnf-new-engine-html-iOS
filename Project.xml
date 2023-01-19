@@ -27,6 +27,8 @@
 	<classpath name="source" />
 	<assets path="assets" />
 
+        <assets path="mobile" rename="assets/mobile" if="mobileCweb" />
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
