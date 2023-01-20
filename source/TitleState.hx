@@ -112,11 +112,12 @@ class TitleState extends MusicBeatState
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
 
 		#if (mobile || web)
+                var justTouched:Bool = false
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.justPressed)
 			{
-				pressedEnter = true;
+				justTouched = true;
 			}
 		}
 		#end
@@ -129,12 +130,12 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 		}
 
-		if (pressedEnter && !skippedIntro)
+		if (#if (mobile || web) justTouched #end pressedEnter && !skippedIntro)
 		{
 			skipIntro();
 		}
 
-		if (pressedEnter && !transitioning && skippedIntro)
+		if (#if (mobile || web) justTouched || #end pressedEnter && !transitioning && skippedIntro)
 		{
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 
