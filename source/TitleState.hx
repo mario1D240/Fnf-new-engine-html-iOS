@@ -113,14 +113,10 @@ class TitleState extends MusicBeatState
 
 		#if (mobile || web)
                 var justTouched:Bool = false;
-		for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed)
-			{
-				justTouched = true;
-			}
-		}
-		#end
+                for (touch in FlxG.touches.list)
+	        if (touch.justPressed)
+		justTouched = true;
+                #end
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
@@ -130,7 +126,7 @@ class TitleState extends MusicBeatState
 				pressedEnter = true;
 		}
 
-		if (#if (mobile || web) justTouched #end pressedEnter && !skippedIntro)
+		if (#if (mobile || web) justTouched || #end pressedEnter && !skippedIntro)
 		{
 			skipIntro();
 		}
