@@ -1,5 +1,6 @@
 package;
 
+// import Controls;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -65,10 +66,10 @@ class PlayState extends MusicBeatState
 
 	private var healthHeads:FlxSprite;
 
-        var controls(get, never):Controls;
+        /*var controls(get, never):Controls;
 
 	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
+		return PlayerSettings.player1.controls;*/
 
 	override public function create()
 	{
